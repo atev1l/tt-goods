@@ -7,8 +7,13 @@
         @click="goToProduct(product.id)"
     >
       <div class="product__favourite-icon" @click.stop="toggleFavourite(product)">
-        <img class="favorite-icon" v-if="product.isFavourite" :src="favoritesIconSrc">
-        <img class="empty" v-else :src="favoritesIconEmptySrc" />
+        <div v-if="isFavoritesPage">
+          <img :src="CrossIconSrc" alt="cross-icon">
+        </div>
+        <div v-else>
+          <img class="favorite-icon" v-if="product.isFavourite" :src="favoritesIconSrc" alt="favorite-icon">
+          <img class="empty" v-else :src="favoritesIconEmptySrc" alt="empty-icon"/>
+        </div>
       </div>
       <img class="product__image" :src=product.image />
       <div class="product__info">
@@ -22,6 +27,7 @@
 <script>
 import FavoritesIconEmpty from '../../../public/img/favoritesEmpty.svg';
 import FavoritesIcon from "../../../public/img/favorites.svg";
+import CrossIcon from "../../../public/img/cross.svg";
 
 export default {
   name: 'ProductTable',
@@ -29,7 +35,8 @@ export default {
   data() {
     return {
       favoritesIconSrc: FavoritesIcon,
-      favoritesIconEmptySrc: FavoritesIconEmpty
+      favoritesIconEmptySrc: FavoritesIconEmpty,
+      CrossIconSrc: CrossIcon
     };
   },
 
@@ -37,7 +44,8 @@ export default {
     products: {
       type: Array,
       required: true
-    }
+    },
+    isFavoritesPage: false
   },
 
   methods: {

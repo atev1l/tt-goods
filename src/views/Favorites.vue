@@ -10,6 +10,7 @@
         class="products-container"
         :products="favorites"
         v-if="favorites.length"
+        :isFavoritesPage="true"
     />
     <div v-else class="favorites-title__empty">{{ textEmptyFavorites }}</div>
   </Layout>
